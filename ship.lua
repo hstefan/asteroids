@@ -10,6 +10,7 @@ Ship = Class {
 		self.mass = 0.0025
 		self.force = Vector(0, 0)
 		self.vel = Vector(0, 0)
+		self.topSpeed = 250
 	end,
 }
 
@@ -27,6 +28,9 @@ function Ship:update(dt)
 	self.force = self:calculateForce(dt)
 	self.pos = self.pos + self.vel * dt
 	self.vel = self.vel + (self.force * 1/self.mass ) * dt
+	if self.vel:len() > self.topSpeed then
+		self.vel = self.topSpeed * self.vel:normalized()
+	end
 end
 
 function Ship:draw()
