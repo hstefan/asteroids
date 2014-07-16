@@ -4,34 +4,27 @@ Vector = require "hump.vector"
 Ship = Class {
 	init = function(self, pos)
 		self.pos = pos
-		self.acc = Vector(0, 0)
-		self.vel = Vector(0, 0)
-		self.theta = 0.0
-		self.rvel = 4
-		self.pvel = 400
 		self.sprite = love.graphics.newImage('data/ship.png')
 		self.size = Vector(self.sprite:getWidth(), self.sprite:getHeight())
 		self.sprtheta = -math.pi / 2
+		self.mass = 0.0025
+		self.force = Vector(0, 0)
+		self.vel = Vector(0, 0)
 	end,
 }
 
 function Ship:update(dt)
 	if love.keyboard.isDown('up') then
-		self.vel = Vector(math.cos(self.sprtheta + self.theta), math.sin(self.sprtheta + self.theta))
+		self.force = Vector(0, -1)
 	elseif love.keyboard.isDown('down') then
-		self.vel = Vector(math.cos(self.sprtheta + self.theta), math.sin(self.sprtheta + self.theta))
+		self.force = Vector(0, 1)
 	else
-		self.vel = Vector(0, 0)
+		self.force = -self.force
 	end
 
-	if love.keyboard.isDown('left') then
-		self.theta = self.theta - self.rvel * dt
-	elseif love.keyboard.isDown('right') then
-		self.theta = self.theta + self.rvel * dt
-	end
-
-	self.theta = self.theta % (2 * math.pi)
-	self.pos = self.pos + self.vel * dt * self.pvel
+	self.pos = self.pos + self.vel * dt
+	self.vel = self.vel + (self.force * 1/self.mass ) * dt
+	print(self.vel)
 end
 
 function Ship:draw()
