@@ -13,18 +13,20 @@ Ship = Class {
 	end,
 }
 
-function Ship:update(dt)
+function Ship:calculateForce(dt)
+	local f = self.force:clone()
 	if love.keyboard.isDown('up') then
-		self.force = Vector(0, -1)
+		f = Vector(0, -1)
 	elseif love.keyboard.isDown('down') then
-		self.force = Vector(0, 1)
-	else
-		self.force = -self.force
+		f = Vector(0, 1)
 	end
+	return f
+end
 
+function Ship:update(dt)
+	self.force = self:calculateForce(dt)
 	self.pos = self.pos + self.vel * dt
 	self.vel = self.vel + (self.force * 1/self.mass ) * dt
-	print(self.vel)
 end
 
 function Ship:draw()
