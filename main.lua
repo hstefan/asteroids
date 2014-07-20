@@ -7,7 +7,7 @@ local fonts = require "fonts"
 function love.load()
 	fonts.load()
 	gamestate.registerEvents()
-	gamestate.switch(menu)
+	gamestate.switch(game)
 end
 
 function love.quit()
