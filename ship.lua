@@ -48,7 +48,7 @@ end
 
 function Ship:drag(dt)
 	if love.keyboard.isDown('down') then
-		return 0.9
+		return 0.95
 	end
 	return 1
 end
