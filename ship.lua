@@ -20,7 +20,7 @@ Ship = Class {
 }
 
 function Ship:calculateForce(dt)
-	return (self.thrust * (Vector(0, 1) + 10 * Vector(math.cos(self.theta), math.sin(self.theta))))
+	return (self.thrust * (Vector(0, 1) + 10 * Vector(math.cos(self.theta), math.sin(self.theta))):normalized())
 end
 
 function Ship:calculateRadialAccel(dt)
