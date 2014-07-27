@@ -40,7 +40,7 @@ function Ship:calculateThrustAccel(dt)
 end
 
 function Ship:calculateThrust(dt)
-	if love.keyboard.isDown('down') then
+	if love.keyboard.isDown('down') or not love.keyboard.isDown('up') then
 		return self.thrust * 0.2
 	end
 	return Util.clamp(self.thrust + self:calculateThrustAccel(dt) * dt, -1, 1)
