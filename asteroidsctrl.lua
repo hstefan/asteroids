@@ -48,7 +48,7 @@ end
 function AsteroidsCtrl:draw()
 	for i, v in ipairs(self.asteroids) do
 		love.graphics.setColor(255, 255, 255)
-		love.graphics.circle('fill', v.pos.x, v.pos.y, v.r, 40)
+		love.graphics.circle('line', v.pos.x, v.pos.y, v.r, 40)
 	end
 end
 
